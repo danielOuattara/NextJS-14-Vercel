@@ -7,6 +7,8 @@ const {
 } = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
+//---------------------------------------------
+
 async function seedUsers(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -45,6 +47,8 @@ async function seedUsers(client) {
     throw error;
   }
 }
+
+//---------------------------------------------
 
 async function seedInvoices(client) {
   try {
@@ -86,6 +90,8 @@ async function seedInvoices(client) {
   }
 }
 
+//---------------------------------------------
+
 async function seedCustomers(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -124,6 +130,8 @@ async function seedCustomers(client) {
     throw error;
   }
 }
+
+//---------------------------------------------
 
 async function seedRevenue(client) {
   try {

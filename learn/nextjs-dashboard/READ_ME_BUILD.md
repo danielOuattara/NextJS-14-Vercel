@@ -2232,7 +2232,8 @@ In your `page.tsx` file:
 4. Import a new skeleton component called `<CardsSkeleton />`
 5. Wrap `<CardWrapper />` in Suspense.
 
-/app/dashboard/page.tsx
+```tsx
+// /app/dashboard/page.tsx
 
 import CardWrapper from '@/app/ui/dashboard/cards';
 // ...
@@ -2257,9 +2258,17 @@ export default async function Page() {
     </main>
   );
 }
+```
 
-Then, move into the file /app/ui/dashboard/cards.tsx, import the fetchCardData() function, and invoke it inside the <CardWrapper/> component. Make sure to uncomment any necessary code in this component.
-/app/ui/dashboard/cards.tsx
+Then, move into the file `/app/ui/dashboard/cards.tsx`.
+
+Import the `fetchCardData()` function, and invoke it inside
+the `<CardWrapper/>` component.
+
+Make sure to uncomment any necessary code in this component.
+
+```tsx
+// /app/ui/dashboard/cards.tsx
 
 // ...
 import { fetchCardData } from '@/app/lib/data';
@@ -2287,44 +2296,69 @@ export default async function CardWrapper() {
     </>
   );
 }
+```
 
-Refresh the page, and you should see all the cards load in at the same time. You can use this pattern when you want multiple components to load in at the same time.
-Deciding where to place your Suspense boundaries
+Refresh the page, and you should see all the cards load in
+at the same time. You can use this pattern when you want
+multiple components to load in at the same time.
 
-Where you place your Suspense boundaries will depend on a few things:
+###  Deciding where to place your Suspense boundaries
 
-    How you want the user to experience the page as it streams.
-    What content you want to prioritize.
-    If the components rely on data fetching.
+Where you place your Suspense boundaries will depend on a
+few things:
 
-Take a look at your dashboard page, is there anything you would've done differently?
+1. How you want the user to experience the page as it streams.
+2. What content you want to prioritize.
+3. If the components rely on data fetching.
+
+Take a look at your dashboard page, is there anything you
+would've done differently?
 
 Don't worry. There isn't a right answer.
 
-    You could stream the whole page like we did with loading.tsx... but that may lead to a longer loading time if one of the components has a slow data fetch.
-    You could stream every component individually... but that may lead to UI popping into the screen as it becomes ready.
-    You could also create a staggered effect by streaming page sections. But you'll need to create wrapper components.
+1. You could stream the whole page like we did with loading.tsx...
+   but that may lead to a longer loading time if one of the components
+   has a slow data fetch.
 
-Where you place your suspense boundaries will vary depending on your application. In general, it's good practice to move your data fetches down to the components that need it, and then wrap those components in Suspense. But there is nothing wrong with streaming the sections or the whole page if that's what your application needs.
+2. You could stream every component individually... but that may lead
+   to UI popping into the screen as it becomes ready.
 
-Don't be afraid to experiment with Suspense and see what works best, it's a powerful API that can help you create more delightful user experiences.
-It’s time to take a quiz!
+3. You could also create a staggered effect by streaming page sections.
+   But you'll need to create wrapper components.
 
-Test your knowledge and see what you’ve just learned.
+Where you place your suspense boundaries will vary depending on your
+application. In general, it's good practice to move your data fetches
+down to the components that need it, and then wrap those components in
+Suspense.
 
-In general, what is considered good practice when working with Suspense and data fetching?
-Looking ahead
+But there is nothing wrong with streaming the sections or the whole page
+if that's what your application needs.
 
-Streaming and Server Components give us new ways to handle data fetching and loading states, ultimately with the goal of improving the end user experience.
+Don't be afraid to experiment with Suspense and see what works best,
+it's a powerful API that can help you create more delightful user
+experiences.
+>
+> **In general, what is considered good practice when working with Suspense and data > fetching?**
+>
+> Move data fetches down to the components that need it
+>
+> By moving data fetching down to the components that need it,
+> you can create more granular Suspense boundaries. This allows
+> you to stream specific components and prevent the UI from blocking
+>
 
-In the next chapter, you'll learn about Partial Prerendering, a new Next.js rendering model built with streaming in mind.
-9
-You've Completed Chapter 9
+### Looking ahead
 
-You've learned how to stream components with Suspense and loading skeletons.
+Streaming and Server Components give us new ways to handle data
+fetching and loading states, ultimately with the goal of improving
+the end user experience.
 
-Next Up
+In the next chapter, you'll learn about `Partial Pre-rendering`,
+a new Next.js `rendering model` built with streaming in mind.
 
-10: Partial Prerendering (Optional)
+---
 
-An early look into Partial Prerendering - a new experimental rendering model built with streaming.
+## Chapter 10: Partial Pre-rendering (Optional)
+
+An early look into Partial Pre-rendering - a new experimental rendering
+model built with streaming.

@@ -11,6 +11,8 @@ import {
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
+//-------------------------------------------------
+
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
@@ -21,7 +23,7 @@ export async function fetchRevenue() {
     // Don't do this in production :)
 
     console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
@@ -34,9 +36,12 @@ export async function fetchRevenue() {
   }
 }
 
+//-------------------------------------------------
+
 export async function fetchLatestInvoices() {
   noStore();
   try {
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
       FROM invoices
@@ -54,6 +59,8 @@ export async function fetchLatestInvoices() {
     throw new Error('Failed to fetch the latest invoices.');
   }
 }
+
+//-------------------------------------------------
 
 export async function fetchCardData() {
   noStore();
@@ -90,6 +97,8 @@ export async function fetchCardData() {
     throw new Error('Failed to fetch card data.');
   }
 }
+
+//-------------------------------------------------
 
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
@@ -129,6 +138,8 @@ export async function fetchFilteredInvoices(
   }
 }
 
+//-------------------------------------------------
+
 export async function fetchInvoicesPages(query: string) {
   noStore();
 
@@ -151,6 +162,8 @@ export async function fetchInvoicesPages(query: string) {
     throw new Error('Failed to fetch total number of invoices.');
   }
 }
+
+//-------------------------------------------------
 
 export async function fetchInvoiceById(id: string) {
   noStore();
@@ -179,6 +192,8 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
+//-------------------------------------------------
+
 export async function fetchCustomers() {
   try {
     const data = await sql<CustomerField>`
@@ -196,6 +211,8 @@ export async function fetchCustomers() {
     throw new Error('Failed to fetch all customers.');
   }
 }
+
+//-------------------------------------------------
 
 export async function fetchFilteredCustomers(query: string) {
   noStore();
@@ -231,6 +248,8 @@ export async function fetchFilteredCustomers(query: string) {
     throw new Error('Failed to fetch customer table.');
   }
 }
+
+//-------------------------------------------------
 
 export async function getUser(email: string) {
   try {
